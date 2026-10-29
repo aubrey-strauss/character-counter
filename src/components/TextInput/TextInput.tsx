@@ -13,7 +13,8 @@ export const TextInput: React.FC<TextInputProps> = ({
         className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         placeholder={placeholder}
         defaultValue={initialValue}
-        onChange={(e) => onTextChange(e.target.value)}
+        // call the parent and tell it what’s in the box now
+        onChange={(e) => onTextChange(e.target.value)} // in the event, find the target, and get its value
         rows={6}
       />
     </div>
