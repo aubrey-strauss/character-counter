@@ -9,50 +9,58 @@ import StatsDisplay from '../StatsDisplay/StatsDisplay';
 import type { CharacterCounterProps, TextStats } from '../../types';
 
 export default function CharacterCounter({
-  minWords = 25,
-  maxWords = 300,
-  targetReadingTime = 5,
+    minWords = 25,
+    maxWords = 300,
+    targetReadingTime = 5,
 }: CharacterCounterProps) {
-  // ---------- 1. STATE ----------
-  // TODO: one piece of state to hold the text the user types (starts as '')
-const [text, setText] = useState('');
+    // ---------- 1. STATE ----------
+    // TODO: one piece of state to hold the text the user types (starts as '')
+    const [text, setText] = useState('');
 
-  // ---------- 2. EVENT HANDLER ----------
-  // TODO: a function TextInput calls every time the text changes.
-  // It receives the new text and saves it into your state.
-  // Read as a sentence: “handleOnTextChange is a function that takes the new text and saves it.”
-const handleOnTextChange = (newText: string) => {
-    setText(newText);
-};
+    // ---------- 2. EVENT HANDLER ----------
+    // TODO: a function TextInput calls every time the text changes.
+    // It receives the new text and saves it into your state.
+    // Read as a sentence: “handleOnTextChange is a function that takes the new text and saves it.”
+    const handleOnTextChange = (newText: string) => {
+        setText(newText);
+    };
 
-  // ---------- 3. THE MATH ----------
-  // TODO: characters  -> text.length
-  // TODO: words       -> trim, split on spaces (/\s+/), 0 if empty
-  // TODO: readingTime -> words / 200 (words per minute)
-  // TODO: put them into one object that matches your TextStats type
-  // const stats: TextStats = { ... };
+    // ---------- 3. THE MATH ----------
+    // Read it as: “characterCount is the length of the text.”
+    const characterCount = text.length;
+    // TODO: words -> trim, split on spaces (/\s+/), 0 if empty
+    // A regular if statement can’t sit on the right side of =. For a choice inside one line, use the ternary.
+    const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
 
+    // TODO: readingTime
+    // Read it as: “readingTime is the word count divided by 200.”
+    // 200 wpm = common average adult reading speed
+    const readingTime = wordCount / 200;
 
-  // ---------- 4. PROGRESS BAR ----------
-  // TODO: percent = words / maxWords * 100, but never more than 100
-  //       (hint: Math.min)
+    // TODO: put them into one object that matches your TextStats type
+    // Read each line as “the characterCount label holds my characterCount variable.”
+    const stats: TextStats = { characterCount, wordCount, readingTime };
 
+    // ---------- 4. PROGRESS BAR ----------
+    // TODO: percent: if someone types more than maxWords, the answer goes over 100. 
+    // A bar at 150% would stick out past its track. So you cap it at 100.
+    const percent = Math.min(wordCount / maxWords * 100);
 
-  // ---------- 5. WHAT SHOWS ON SCREEN ----------
-  return (
-    <div>
-      {/* TODO: TextInput — pass it your handler function */}
-      <TextInput />
+    // ---------- 5. WHAT SHOWS ON SCREEN ----------
+    return (
+        <div>
+            {/* TODO: TextInput — pass it your handler function */}
+            <TextInput />
 
-      {/* TODO: StatsDisplay — pass it your stats object */}
-      <StatsDisplay />
+            {/* TODO: StatsDisplay — pass it your stats object */}
+            <StatsDisplay />
 
-      {/* TODO: progress bar
+            {/* TODO: progress bar
           - an outer div (the gray track)
           - an inner div whose width is your percent, e.g. style={{ width: `${percent}%` }} */}
 
-      {/* TODO: a message about minWords / maxWords
+            {/* TODO: a message about minWords / maxWords
           (e.g. "Write at least X words" or "Over the limit") */}
-    </div>
-  );
+        </div>
+    );
 }
