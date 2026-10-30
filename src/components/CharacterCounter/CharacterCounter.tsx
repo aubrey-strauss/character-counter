@@ -1,0 +1,1 @@
+//all the math happens in one place: CharacterCounter, the parent
