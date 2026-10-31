@@ -2,8 +2,8 @@
 // components/CharacterCounter/CharacterCounter.tsx
 // STARTER SKELETON: the structure is here, the logic is yours to fill in.
 // Change the type and prop names to match YOUR types/index.ts.
-
-import { useState } from "react";
+// Add useCallback to handler
+import { useState, useCallback } from "react";
 import { TextInput } from "../TextInput/TextInput";
 import { StatsDisplay } from "../StatsDisplay/StatsDisplay";
 import type { CharacterCounterProps, TextStats } from "../../types";
@@ -21,9 +21,9 @@ export default function CharacterCounter({
   // TODO: a function TextInput calls every time the text changes.
   // It receives the new text and saves it into your state.
   // Read as a sentence: “handleOnTextChange is a function that takes the new text and saves it.”
-  const handleOnTextChange = (newText: string) => {
+  const handleOnTextChange = useCallback((newText: string) => {
     setText(newText);
-  };
+  }, []);
 
   // ---------- 3. THE MATH ----------
   // Read it as: “characterCount is the length of the text.”
@@ -69,6 +69,10 @@ export default function CharacterCounter({
           : wordCount > maxWords
             ? `Over the limit! Max is ${maxWords} words.`
             : `Nice — you're within ${minWords}–${maxWords} words.`}
+      </p>
+      <p className="text-sm text-gray-600">
+        Target reading time: {targetReadingTime} min{" "}
+        {readingTime > targetReadingTime ? "⚠️ Over target" : "✅ Under target"}
       </p>
     </div>
   );
