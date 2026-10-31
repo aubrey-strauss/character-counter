@@ -48,7 +48,8 @@ export default function CharacterCounter({
 
   // ---------- 5. WHAT SHOWS ON SCREEN ----------
   return (
-    <div className="max-w-2xl mx-auto p-6 space-y-4">
+    <div className="max-w-2xl mx-auto p-6 space-y-4 bg-white rounded-xl shadow-md">
+      <h1 className="text-2xl font-bold text-gray-800">Character Counter</h1>
       <TextInput onTextChange={handleOnTextChange} />
       {/* TODO: StatsDisplay — pass it your stats object */}
       <StatsDisplay stats={stats} showReadingTime={true} />
@@ -57,10 +58,14 @@ export default function CharacterCounter({
           - an inner div whose width is your percent, e.g. style={{ width: `${percent}%` }} */}
       <div className="w-full h-2 bg-gray-200 rounded-full">
         <div
-          className="h-2 bg-blue-500 rounded-full"
+          className={`h-2 rounded-full transition-all duration-300 ${wordCount > maxWords ? "bg-red-600" : "bg-green-600"}`}
           style={{ width: `${percent}%` }}
         />
       </div>
+      <p className="text-xs text-gray-500">
+        Min: {minWords} | Max: {maxWords}
+      </p>
+
       {/* TODO: a message about minWords / maxWords
           (e.g. "Write at least X words" or "Over the limit") */}
       <p className="text-sm text-gray-600">
