@@ -47,27 +47,29 @@ export default function CharacterCounter({
   const percent = Math.min((wordCount / maxWords) * 100, 100);
 
   // ---------- 5. WHAT SHOWS ON SCREEN ----------
-  <div className="max-w-2xl mx-auto p-6 space-y-4">
-    <TextInput onTextChange={handleOnTextChange} />
-    {/* TODO: StatsDisplay — pass it your stats object */}
-    <StatsDisplay stats={stats} showReadingTime={true} />
-    {/* TODO: progress bar
+  return (
+    <div className="max-w-2xl mx-auto p-6 space-y-4">
+      <TextInput onTextChange={handleOnTextChange} />
+      {/* TODO: StatsDisplay — pass it your stats object */}
+      <StatsDisplay stats={stats} showReadingTime={true} />
+      {/* TODO: progress bar
           - an outer div (the gray track)
           - an inner div whose width is your percent, e.g. style={{ width: `${percent}%` }} */}
-    <div className="w-full h-2 bg-gray-200 rounded-full">
-      <div
-        className="h-2 bg-blue-500 rounded-full"
-        style={{ width: `${percent}%` }}
-      />
-    </div>
-    {/* TODO: a message about minWords / maxWords
+      <div className="w-full h-2 bg-gray-200 rounded-full">
+        <div
+          className="h-2 bg-blue-500 rounded-full"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
+      {/* TODO: a message about minWords / maxWords
           (e.g. "Write at least X words" or "Over the limit") */}
-    <p className="text-sm text-gray-600">
-      {wordCount < minWords
-        ? `Write at least ${minWords} words.`
-        : wordCount > maxWords
-          ? `Over the limit! Max is ${maxWords} words.`
-          : `Nice — you're within ${minWords}–${maxWords} words.`}
-    </p>
-  </div>;
+      <p className="text-sm text-gray-600">
+        {wordCount < minWords
+          ? `Write at least ${minWords} words.`
+          : wordCount > maxWords
+            ? `Over the limit! Max is ${maxWords} words.`
+            : `Nice — you're within ${minWords}–${maxWords} words.`}
+      </p>
+    </div>
+  );
 }

@@ -1,9 +1,9 @@
-import { TextInput } from './components/TextInput/TextInput';
+import CharacterCounter from "./components/CharacterCounter/CharacterCounter";
 
 function App() {
   return (
     <div className="p-8">
-      <TextInput onTextChange={(text) => console.log(text)} />
+      <CharacterCounter />
     </div>
   );
 }
